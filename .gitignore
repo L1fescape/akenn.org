@@ -1,0 +1,6 @@
+PSDs/
+_site
+_jekyll_s3.yml
+_drafts/
+docs/
+.DS_Store

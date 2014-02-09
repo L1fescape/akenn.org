@@ -1,0 +1,35 @@
+---
+layout: main
+---
+
+<div class='project single'>
+  <div class='info'>
+    <a href='{{ page.link }}'>
+      <img src='{{ page.icon }}' />
+    </a>
+    <ul>
+      <li><a href='{{ page.link }}'><h2>{{ page.title }}</h2></a></li>
+      {% for info in page.info %}
+        <li><p>{{ info }}</p></li>
+      {% endfor %}
+    </ul>
+  </div>
+  <ul class="meta">
+    {% for meta_hash in page.meta %}
+      {% for meta in meta_hash %}
+        {% if meta[0] == 'date' %}
+        <li><i class="fa fa-calendar"></i> {{ meta[1] }}</li>
+        {% endif %}
+        {% if meta[0] == 'website'  %}
+        <li><a href="{{ meta[1] }}" target="_blank"><i class="fa fa-link"></i> Website</a></li>
+        {% endif %}
+        {% if meta[0] == 'github' %}
+        <li><a href="{{ meta[1] }}" target="_blank"><i class="fa fa-github"></i> Source</a></li>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </ul>
+  <div class='content'>
+    {{  content }}
+  </div>
+</div>

@@ -1,0 +1,64 @@
+---
+layout: project
+title: "WP ShowHide"
+link: "wp-showhide"
+icon: "wp-showhide.png"
+
+info:
+ - "Languages: PHP, Javascript"
+ - "Platform: Wordpress"
+ - "Time: On Going"
+
+meta:
+ - date: "May 16, 2012"
+ - website: "http://wordpress.org/extend/plugins/better-wordpress-showhide-elements/"
+ - github: "https://github.com/L1fescape/wordpress-showhide"
+---
+
+				<div class=section>
+					<p>Hiding spoilers cannot be done easily in Wordpress.</p>
+					<p>Cue Wordpress Plugins.</p>
+					<p>The Wordpress plugins currently available either don't allow custom spoiler text or don't allow you to set the initial state of the spoiler content.</p>
+					<p>Cue Better WP ShowHide.</p>
+					<p>It looks something like this:</p>
+
+          {% highlight html %}
+<a onclick="wp_showhide.main(this, '{myId}')" href="javascript:void(0)">
+  ["{Show Text}", "{Hide Text}", "{visible}"]
+</a>
+<div id="{myId1}">
+  {Content goes here}
+</div>{% endhighlight %}
+
+					<p>Configuration is pretty simple. Replace <code>{myId}</code> with a custom name to identify that individual spoiler in both the <code>onclick</code> attribute of the <code>a</code> tag and in the <code>id</code> attribute of the <code>div</code> tag. </p>
+          <p>Then set what you'd like the text spoiler link content to be when it's being shown by replacing <code>{Show Text}</code> with a custom value. Same goes for <code>{Hide Text}</code>.</p>
+          <p>Set the initial state of the spoiler, either <code>hidden</code> or <code>visible</code>. Do this by replacing <code>{visible}</code> with either of those values.</p>
+					<p>Finally set insert the content you want to hide by replacing <code>{Content goes here}</code> with your custom content. This can be anything from a YouTube video to 29,467 pictures of cats.</p>
+
+          {% highlight html %}
+<a onclick="wp_showhide.main(this, 'spoiler1')" href="javascript:void(0)">
+  ["Show Text", "Hide Text", "visible"]
+</a>
+<div id="spoiler1">
+  Snape kills Dumbledore.
+</div>{% endhighlight %}
+					<p>Here's a fully working example using the code just above this sentence:</p>
+					<p><a onclick="wp_showhide.main(this, 'spoiler1')" href="javascript:void(0)">["View Spoiler", "Hide Spoiler", "hidden"]</a></p>
+					<div id="spoiler1"><p>Snape kills Dumbledore.</p></div>
+					<p>Hopefully that helps!</p>
+					<p>If you feel like contributing to this small little project, feel free to <a href="https://github.com/L1fescape/Better-WP-ShowHide">submit a pull request</a>. It could use some love.</p>
+				</div>
+			</div>
+			<div id="disqus_thread"></div>
+			<script type="text/javascript">
+				var disqus_shortname = 'akenn';
+
+				(function() {
+				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+				 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+				})();
+			</script>
+			<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <!-- WP Showhide -->
+      <script src="/projects/wp-showhide/wp-showhide/better-wp-showhide-elements.js"></script>

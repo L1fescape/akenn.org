@@ -1,0 +1,87 @@
+---
+layout: project
+title: "Tetris"
+link: "tetris"
+icon: "tetris.png"
+
+info:
+ - "Languages: Javascript"
+ - "Time: 1 day"
+
+meta:
+ - date: "August 12, 2012"
+ - github: "https://github.com/L1fescape/HTML5-Tetris"
+---
+  <style>
+    #gameBoard {
+      display:block;
+      margin:0 auto;
+    }
+    .status, .score {
+      display:inline-block;
+      width:196px;
+      text-align:left;
+      font-size:18px;
+    }
+    .score {
+      width:100px;
+    }
+    .game-info {
+      text-align:center;
+      margin-bottom:20px;
+    }
+  </style>
+
+  <div class="section">
+    <div class="game-info">
+      <div class="status">
+        Status: <span id="status"></span>
+      </div>
+      <div class="score">
+        Score: <span id="score"></span>
+      </div>
+    </div>
+  
+    <canvas id="gameBoard"></canvas>
+  </div>
+
+<script src="tetris.js"></script>
+<script>
+  var options = { 
+    gameBoard: document.getElementById('gameBoard'), 
+    scoreBlock: document.getElementById('score'), 
+    pauseBlock: document.getElementById('pause'),
+    blockSize: 30,
+    autostart:false,
+    controls: {
+      left: 37,
+      right: 39,
+      rotate: 38,
+      drop: 40
+    }
+  };
+  var game = new Tetris(options);
+  game.events.on('pause', function() {
+    document.getElementById('status').innerHTML = "Paused";
+  });
+  game.events.on('resume', function() {
+    document.getElementById('status').innerHTML = "Playing";
+  });
+  game.events.on('gameover', function() {
+    document.getElementById('status').innerHTML = "Game Over";
+  });
+  game.init();
+
+</script>
+      
+      <div id="disqus_thread"></div>
+			<script type="text/javascript">
+				var disqus_shortname = 'akenn';
+
+				(function() {
+				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+				 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+				})();
+			</script>
+			<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
