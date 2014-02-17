@@ -64,12 +64,6 @@ body {
   color: #555;
 }
 
-::selection {
-  text-shadow: none;
-  color: #333;
-  background: #FF9;
-}
-
 h1 {
   font-size: 30px;
   line-height: 45px;
@@ -482,6 +476,10 @@ header h3 a, header h3 a:visited {
 
 .project .info li {
   list-style:none;
+}
+
+.project .info li:first-child {
+  margin-bottom:10px;
 }
 
 .project .info li p {
