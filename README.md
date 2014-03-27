@@ -4,22 +4,30 @@ Backups of my personal blog/website.
 
 ## Install
 
-Run this:
-
-`gem install jekyll jekyll-s3`
-
-Then create a file called `_jekyll_s3.yml` with the following contents:
+- Install [Bundler](http://bundler.io/):
 
 ```
-s3_id: YOUR_AWS_S3_ACCESS_KEY_ID
-s3_secret: YOUR_AWS_S3_SECRET_ACCESS_KEY
-s3_bucket: your.blog.bucket.com
+gem install bundle
+```
+
+- Install required gems via bundler
+
+```
+bundle install
+```
+
+- Create a file called `s3_website.yml` with the following contents:
+
+```
+s3_id: <%= ENV['S3_ID'] %>
+s3_secret: <%= ENV['S3_SECRET'] %>
+s3_bucket: blog.example.com
 ```
 
 ## Run
 
-* `jekyll serve`
+* `rake serve`
 
 ## Deploy
 
-* `jekyll build && jekyll-s3`
+* `rake deploy`

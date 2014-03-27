@@ -4,7 +4,7 @@ title: Upgrading Python
 category: posts
 ---
 
-<span class='summary'>TL;DR Don’t replace the default version of python on your machine.</span>
+<span class='summary'>tl;dr Don’t replace the default version of python on your machine.</span>
 
 ---
 
