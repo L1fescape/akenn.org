@@ -2,9 +2,10 @@
 layout: post
 title: Jekyll Liquid Exception Error
 category: posts
+image: jekyll/header.png
 ---
 
-<span class='summary'>tl;dr If you're running arch linux and run into a Liquid Exception error, make sure python 2 is installed.</span>
+<span class='summary'><strong>tl;dr</strong> If you're running Arch linux and run into a Liquid Exception error, make sure python 2 is installed.</span>
 
 ---
 
@@ -14,6 +15,7 @@ I wanted to add a new post about having just recently moved to San Francisco to 
 
 So after cloning my site repo, installing ruby, and installing jekyll, I tried to build the site.
 
+[Link to Gist](https://gist.github.com/L1fescape/beb1a918b8e0b9c8c826)
 {% highlight bash %}
 ❯ jekyll build
 Configuration file: /home/vagrant/code/akenn.org/_config.yml
@@ -23,7 +25,6 @@ Configuration file: /home/vagrant/code/akenn.org/_config.yml
   Liquid Exception: Failed to get header. in _posts/2013-03-04-upgrading-python.markdown
 error: Failed to get header.. Use --trace to view backtrace
 {% endhighlight %}
-
 
 If we look closely we see:
 

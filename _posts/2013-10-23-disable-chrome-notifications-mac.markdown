@@ -2,6 +2,7 @@
 layout: post
 title: Disable Chrome Notifications
 category: posts
+image: chrome-notifications/header.png 
 ---
 
 Recently *Notification Center* was added to Google Chrome. It gives websites and extensions such as Gmail and Google Calendar the ability to show native-like popup notifications. On MacOS, it automatically adds a menu bar icon that looks something like this:

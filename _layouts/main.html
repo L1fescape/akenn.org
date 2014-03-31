@@ -12,6 +12,10 @@
   <meta name="description" content="{{ site.description }}" />
 
   <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-114.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-144.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144.png" />
   <link rel="alternate" type="application/rss+xml" href="/atom.xml" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -23,15 +27,13 @@
 
 <body>
   <header>
-    <h3><a href="/">Andrew Kennedy</a></h3>
+    <h2><a href="/">Andrew Kennedy</a></h2>
     <ul class="nav">
       <li><a href="/projects/">Projects</a></li>
       <li><a href="/blog/">Blog</a></li>
       <li><a href="/contact/">Contact</a></li>
     </ul>
   </header>
-  <div class="container">
-    {{ content }}
-  </div>
+  {{ content }}
 </body>
 </html>

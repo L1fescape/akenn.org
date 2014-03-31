@@ -2,6 +2,7 @@
 layout: post
 title: Disable Dashboard in OSX 10.9 Mavericks
 category: posts
+image: mavericks-dashboard/header.png
 ---
 
 In 10.9, Apple added this checkbox to "Mission Control" in "System Preferences":
