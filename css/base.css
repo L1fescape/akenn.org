@@ -604,15 +604,24 @@ header h2 a, header h2 a:visited {
   color: #cecece;
   margin-bottom:80px;
   font-size:14px;
-  text-align:center;
   line-height:20px;
+}
+
+.byline {
+  line-height: 22px;
+}
+
+.byline {
+  color: #999;
+  text-transform:uppercase;
+  text-align:left;
+  margin:0 auto;
 }
 
 @media all and (max-width: 480px)  {
   .byline {
     text-align:center;
     margin:10px auto;
-    color: #999;
   }
 
   .title {
@@ -644,12 +653,6 @@ header h2 a, header h2 a:visited {
 }
 
 @media all and (max-width: 768px) and (min-width: 481px) {
-  .byline {
-    text-align:left;
-    margin:0 auto;
-    color: #999;
-  }
-
   .title {
     text-align:left;
     width:auto;
@@ -680,13 +683,6 @@ header h2 a, header h2 a:visited {
 }
 
 @media all and (min-width: 769px) {
-  .byline {
-    text-align:left;
-    margin:0 auto;
-    text-transform:uppercase;
-    color: #999;
-  }
-
   .title {
     text-align:left;
     width:auto;
