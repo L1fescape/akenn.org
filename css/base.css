@@ -201,7 +201,7 @@ a:hover i.fa-linkedin, i.fa-linkedin.selected {
 
 /* -- HEADER -- */
 header {
-	width:250px;
+	width:300px;
 	margin:40px auto;
 }
 
@@ -234,7 +234,7 @@ header h2 a, header h2 a:visited {
 
 .nav li:after {
 	content:"//";
-	margin:0 10px;
+	margin:0;
 	color:#ccc;
 }
 
@@ -245,6 +245,7 @@ header h2 a, header h2 a:visited {
 .nav li a {
 	text-decoration:none;
 	color:#555;
+  padding:10px;
 }
 
 .nav li a:hover {
@@ -604,6 +605,7 @@ header h2 a, header h2 a:visited {
   margin-bottom:80px;
   font-size:14px;
   text-align:center;
+  line-height:20px;
 }
 
 @media all and (max-width: 480px)  {

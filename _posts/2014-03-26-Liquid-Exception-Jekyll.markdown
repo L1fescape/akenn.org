@@ -5,7 +5,7 @@ category: posts
 image: jekyll/header.png
 ---
 
-<span class='summary'><strong>tl;dr</strong> If you're running Arch linux and run into a Liquid Exception error, make sure python 2 is installed.</span>
+<span class='summary'><strong>tl;dr</strong> If you're running Jekyll on Arch linux and run into a Liquid Exception error, make sure python2 is installed.</span>
 
 ---
 
