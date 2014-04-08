@@ -2,6 +2,7 @@
 layout: post
 title: Heartbleed
 category: posts
+image: heartbleed/header.png
 ---
 
 The [Heartbleed Bug](http://heartbleed.com/) is a huge deal. It allows anyone to read the RAM of a vulnerable system, exposing user sessions, cookies, passwords, etc. I setup a fresh new ec2 instance and installed nginx with the intent of exploring and testing the heartbleed bug.
