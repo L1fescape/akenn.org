@@ -26,8 +26,12 @@ s3_bucket: blog.example.com
 
 ## Run
 
-* `rake serve`
+```
+rake
+```
 
 ## Deploy
 
-* `rake deploy`
+```
+rake deploy
+```
