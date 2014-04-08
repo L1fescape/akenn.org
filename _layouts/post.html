@@ -2,7 +2,9 @@
 layout: main
 ---
 
+{% if page.image %}
 <div class="hero" style="background-image: url(/blog/images/{{ page.image }});"></div>
+{% endif %}
 
 <div class="blog">
   <section class="title">

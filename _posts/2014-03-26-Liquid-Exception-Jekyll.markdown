@@ -15,7 +15,6 @@ I wanted to add a new post about having just recently moved to San Francisco to 
 
 So after cloning my site repo, installing ruby, and installing jekyll, I tried to build the site.
 
-[Link to Gist](https://gist.github.com/L1fescape/beb1a918b8e0b9c8c826)
 {% highlight bash %}
 ❯ jekyll build
 Configuration file: /home/vagrant/code/akenn.org/_config.yml
