@@ -150,4 +150,10 @@ WARNING: server returned more data than it should - server is vulnerable!
 
 As you can see, my most recent request (a `GET` request to the same url with username and password as params) has the cookies I passed along in the request in there. Now imagine doing that to a much larger site and getting someone's sessionID or some equivalent.
 
-This is a really, really scary bug. Make sure your version of OpenSSL is patched! More at: http://heartbleed.com/
+This is a really, really scary bug. Make sure your version of OpenSSL is patched!
+
+Relevant links:
+
+- http://heartbleed.com
+- http://arstechnica.com/security/2014/04/critical-crypto-bug-exposes-yahoo-mail-passwords-russian-roulette-style
+- http://coderinaworldofcode.blogspot.com/2014/04/my-heart-bleeds-for-openssl.html
