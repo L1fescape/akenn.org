@@ -23,13 +23,13 @@ I ran `:echo has('python')` in vim which returned 0, meaning no python support.
 Inorder to fix this I uninstalled vim, downloaded the latest version, configured it to have python support, and installed it.
 
 {% highlight bash %}
-$ sudo pacman -R vim
-$ wget ftp://ftp.gr.vim.org/pub/vim/unix/vim-7.4.tar.bz2
-$ tar xvf vim-7.4.tar.bz2
-$ cd vim74
-$ ./configure --enable-pythoninterp --with-features=huge
-$ make
-$ sudo make install
+sudo pacman -R vim
+wget ftp://ftp.gr.vim.org/pub/vim/unix/vim-7.4.tar.bz2
+tar xvf vim-7.4.tar.bz2
+cd vim74
+./configure --enable-pythoninterp --with-features=huge
+make
+sudo make install
 {% endhighlight %}
 
 Wohoo, python support! Now back to messing around with emojis.
