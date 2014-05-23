@@ -317,7 +317,9 @@ header h2 a, header h2 a:visited {
 
 .headshot img {
   width:100%;
-  border-radius:150px;
+  -webkit-border-radius: 150px; 
+  -moz-border-radius: 150px; 
+  border-radius: 150px; 
 }
 
 @media all and (max-width: 480px) {
