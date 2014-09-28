@@ -9,11 +9,7 @@ image: jekyll/header.png
 
 ---
 
-I created a new virtual machine via [vagrant](http://vagrantpress.org/) to run [Arch](https://www.archlinux.org/) as a dev vm. If I fuck anything up, I can just revert to an old snapshot rather than trouble shooting for hours to get my machine back to the way it was. 
-
-I wanted to add a new post about having just recently moved to San Francisco to work at [Cloudflare](https://www.cloudflare.com/) (side note: it's awesome! I love the city, love all the things there are to do, and love my new job. I have a post in the works about the move from Florida out here which I'll throw up in the next week). 
-
-So after cloning my site repo, installing ruby, and installing jekyll, I tried to build the site.
+While building my website on a frest [ArchLinux](https://www.archlinux.org/) virtual machine via [vagrant](http://vagrantpress.org/), I ran into the following issue:
 
 {% highlight bash %}
 ❯ jekyll build
