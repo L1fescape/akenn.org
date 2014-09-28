@@ -5,31 +5,33 @@ category: posts
 image: shellshock/header.png
 ---
 
-When news of Shellshock first broke, the main attack vector was applications running on Apache servers via cgi. Now I don't have any apache servers I maintain and if I did I probably wouldn't be running them with CGI (just not my preference). However I wanted to try out this bug and I didn't want to do so in a malicious manner; I simply wanted to see what it did.
+When news of Shellshock first broke, the main vector of attack was any application running on an Apache server via cgi. I don't run any apache servers anymore, and if I did I probably wouldn't be running them with CGI (just not my preference). However, I wanted to try this bug out and I didn't want to do so in a malicious manner; I simply wanted to see what it did.
 
-So let's go create an EC2 instance on AWS and get to work. My preference is to use Ubuntu because I know it best and I'm able to find solutions to issues I encounter very quickly.
+Without further ado, let's hack ourselves!
 
-After our instance is up and running and we've ssh'd into it, the first thing we'll do is see if bash is vulnerable.
+First we'll go create an EC2 instance on AWS. My preference is to use Ubuntu because I know it best and I'm able to find solutions to issues I encounter very quickly.
+
+After our instance is up and running we'll ssh into it and check if the default version of bash is vulnerable.
 
 {% highlight bash %}
-~ ubuntu@ip-10-0-0-153
-❯ env X="() { :;} ; echo busted" /bin/bash -c "echo completed"
+$ ssh -l ubuntu [Your IP address] -i ~/.ssh/shellshock.pem
+$ env X="() { :;} ; echo busted" /bin/bash -c "echo completed"
 busted
 completed
 {% endhighlight %}
 
 Oh heck yeah, it totally is.
 
-(Side note: I'm using an old AWS image I made a few months ago. I believe Amazon patched bash on all their default images. If bash is already patched on your machine my next suggestion is to find a vagrant image that isn't patched yet. If you can't, leave a comment below. I may be able to post a tutorial on how to compile an old, vulnerable version of bash and replace the patched one on your box; for science!) 
+(Side note: I'm using an old AWS image I made a few months ago. I believe Amazon patched bash on all their default images. If bash is already patched on your machine, my next suggestion is to find a vagrant image that isn't patched yet. If you can't, leave a comment below. I can post a tutorial on how to compile an old, vulnerable version of bash and replace the patched one on your box; for science!) 
 
-Ok next step: installing apache and enabling mod_cgi.
+Ok next step: installing apache and configuring it to use cgi.
 
 {% highlight bash %}
 sudo apt-get install apache2
 sudo a2enmod cgi
 {% endhighlight %}
 
-We need to tell apache when to use cgi. We'll do that by adding the following somewhere in the config of a site in our enabled virtual hosts folder (`/etc/apache2/sites-enabled`; in our case the exact file is `/etc/apache2/sites-enabled/000-default.conf`):
+That was easy. We need to tell apache when to use cgi. We'll do that by adding the following somewhere in the config of a site in our enabled virtual hosts folder (`/etc/apache2/sites-enabled`; in our case the exact file is `/etc/apache2/sites-enabled/000-default.conf`):
 
 {% highlight apache %}
 ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
@@ -41,8 +43,7 @@ ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
 </Directory>
 {% endhighlight %}
 
-
-My complete apache conf file for the virtual host we'll be using looks like this:
+My complete apache configuration file for the virtual host we'll be using looks like this:
 
 {% highlight apache %}
 <VirtualHost *:80>
@@ -62,10 +63,9 @@ My complete apache conf file for the virtual host we'll be using looks like this
 </VirtualHost>
 {% endhighlight %}
 
-
 Add a file called `poc.cgi` to `/usr/lib/cgi-bin` with the following contents:
 
-{% highlight perl %}
+{% highlight bash %}
 #!/bin/bash
 
 echo "Content-type: text/html"
@@ -86,7 +86,7 @@ echo '</html>'
 exit 0
 {% endhighlight %}
 
-Note: the contents of this file can be anything. In our case the file just needs to exist. I chose to copy it from [https://www.invisiblethreat.ca/2014/09/cve-2014-6271/](https://www.invisiblethreat.ca/2014/09/cve-2014-6271/) because it's an easy way to check that apache is configured correctly.
+Note: the contents of this file can be anything, as can the filename. In our case the file just needs to exist. I chose to copy the bash script above from [https://www.invisiblethreat.ca/2014/09/cve-2014-6271/](https://www.invisiblethreat.ca/2014/09/cve-2014-6271/) because it's an easy way to check that apache is configured correctly.
 
 Additional Note: you may need to change the permissions of this file and directory. If you get a 403 error, try `sudo chmod 755 -R /usr/lib/cgi-bin`.
 

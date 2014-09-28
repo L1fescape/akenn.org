@@ -307,6 +307,12 @@ header h2 a, header h2 a:visited {
   }
 }
 
+@media all and (min-width: 960px) {
+  .container, .blog {
+    width:900px;
+  }
+}
+
 
 
 /* -- INDEX -- */
@@ -858,7 +864,6 @@ p code {
   margin: 0;
   color: #bd2426;
   vertical-align: middle;
-  display: inline-block;
   padding:0px 5px;
   background-color: #e8e8e8;
   border: 1px solid #dbdbdb;
@@ -909,7 +914,7 @@ p code {
 
 @media all and (min-width: 769px) {
   .highlighttable {
-    margin:10px -50px;
+    margin:10px 0;
   }
 
   .highlighttable td, .highlight pre {
@@ -918,8 +923,8 @@ p code {
   }
   
   .highlight pre {
-    width: 745px;
-    margin-left:-35px;
+    width: 100%;
+    margin-left:0;
   }
 
 }
