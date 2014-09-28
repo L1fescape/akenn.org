@@ -86,9 +86,9 @@ echo '</html>'
 exit 0
 {% endhighlight %}
 
-Source: https://www.invisiblethreat.ca/2014/09/cve-2014-6271/
+Note: the contents of this file can be anything. In our case the file just needs to exist. I chose to copy it from [https://www.invisiblethreat.ca/2014/09/cve-2014-6271/](https://www.invisiblethreat.ca/2014/09/cve-2014-6271/) because it's an easy way to check that apache is configured correctly.
 
-Note: you may need to change the permissions of this file and directory. If you get a 403 error, try `sudo chmod 755 -R /usr/lib/cgi-bin`.
+Additional Note: you may need to change the permissions of this file and directory. If you get a 403 error, try `sudo chmod 755 -R /usr/lib/cgi-bin`.
 
 Now let's restart apache.
 
@@ -96,8 +96,51 @@ Now let's restart apache.
 sudo services apache2 restart
 {% endhighlight %}
 
+If everything went according to plan, we should be able to run this script via cgi and have the result returned to us. Let's see if that works:
 
-If everything went according to plan, we should be able to exploit ourselves; Let's try it out!
+{% highlight bash %}
+~
+❯ curl http://[Your IP Address]/cgi-bin/poc.cgi
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>PoC</title>
+</head>
+<body>
+<pre>
+SERVER_SIGNATURE=<address>Apache/2.4.7 (Ubuntu) Server at [Your IP Address] Port 80</address>
+
+HTTP_USER_AGENT=curl/7.30.0
+SERVER_PORT=80
+HTTP_HOST=[Your IP Address]
+DOCUMENT_ROOT=/var/www/html
+SCRIPT_FILENAME=/usr/lib/cgi-bin/poc.cgi
+REQUEST_URI=/cgi-bin/poc.cgi
+SCRIPT_NAME=/cgi-bin/poc.cgi
+REMOTE_PORT=34236
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+CONTEXT_PREFIX=/cgi-bin/
+PWD=/usr/lib/cgi-bin
+SERVER_ADMIN=webmaster@localhost
+REQUEST_SCHEME=http
+HTTP_ACCEPT=*/*
+REMOTE_ADDR=[Remote IP Address]
+SHLVL=1
+SERVER_NAME=
+SERVER_SOFTWARE=Apache/2.4.7 (Ubuntu)
+QUERY_STRING=
+SERVER_ADDR=10.0.0.153
+GATEWAY_INTERFACE=CGI/1.1
+SERVER_PROTOCOL=HTTP/1.1
+REQUEST_METHOD=GET
+CONTEXT_DOCUMENT_ROOT=/usr/lib/cgi-bin/
+_=/usr/bin/env
+</pre>
+</body>
+</html>
+{% endhighlight %}
+
+Awesome! Now that everything is set up, let's exploit ourselves.
 
 {% highlight bash %}
 ~
@@ -130,4 +173,15 @@ ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/zsh
 
 {% endhighlight %}
 
-Aww yiss.
+Great success! We were successfully able to run an arbitrary code execution exploit on a remote machine (that we own).
+
+Now go patch bash!
+
+Resources and helpful links:
+
+- [How to Protect your Server Against the Shellshock Bash Vulnerability](https://www.digitalocean.com/community/tutorials/how-to-protect-your-server-against-the-shellshock-bash-vulnerability)
+- [Everything you need to know about the Shellshock Bash bug](http://www.troyhunt.com/2014/09/everything-you-need-to-know-about.html)
+- [CVE-2014-6271: BASH LETS YOU DO BAD THINGS. (SHELLSHOCK)](https://www.invisiblethreat.ca/2014/09/cve-2014-6271/)
+- [How do I secure Apache against the Bash Shellshock vulnerability?](http://security.stackexchange.com/questions/68146/how-do-i-secure-apache-against-the-bash-shellshock-vulnerability)
+- [Shellshock DHCP RCE Proof of Concept](https://www.trustedsec.com/september-2014/shellshock-dhcp-rce-proof-concept/)
+- [Bash – ShellShocker – Attacks Increase in the Wild – Day 1](http://blog.sucuri.net/2014/09/bash-shellshocker-attacks-increase-in-the-wild-day-1.html)
