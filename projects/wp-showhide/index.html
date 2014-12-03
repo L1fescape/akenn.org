@@ -24,7 +24,7 @@ meta:
 
           {% highlight html %}
 <a href="#" showhide="{myId}">
-  ["{Show Text}", "{Hide Text}"]
+  {Show Text}, {Hide Text}
 </a>
 <div id="{myId}">
   {Content goes here}
@@ -37,13 +37,13 @@ meta:
 
           {% highlight html %}
 <a href="#" showhide="ur-a-wizard-harry">
-  ["I dare you to click this", "Haha, now you know:"]
+  I dare you to click this, Haha, now you know:
 </a>
 <div id="ur-a-wizard-harry">
   Snape kills Dumbledore.
 </div>{% endhighlight %}
 					<p>Here's a fully working example using the code just above this sentence:</p>
-          <p><a href="#" showhide="ur-a-wizard-harry"> ["I dare you to click this", "Haha, now you know:"] </a></p>
+          <p><a href="#" showhide="ur-a-wizard-harry">I dare you to click this, Haha, now you know:</a></p>
           <div id="ur-a-wizard-harry"> Snape kills Dumbledore.</div>
 					<p>Hopefully that helps!</p>
 					<p>If you feel like contributing to this small little project, feel free to <a href="https://github.com/akenn/wordpress-showhide">submit a pull request</a>. It could use some love.</p>

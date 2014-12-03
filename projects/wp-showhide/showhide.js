@@ -18,18 +18,15 @@
 
       // check if the element has text inside it and attempt to parse it
       if (text){
-        try {
-          settings = JSON.parse($elem.text());
-          $elem.data("wpsh_hide", settings[0]);
-          $elem.data("wpsh_show", settings[1]);
-          // legacy visibility
-          if (settings.length > 2) {
-            visible = (settings[2].toLowerCase() == 'visible') ? true : false;
-          }
-        }catch(e){
-          console.error("Error parsing text inside showhide element", $elem);
-          console.error(e);
-          continue;
+        settings = text.split(',');
+        for (var i = 0; i < settings.length; i++){
+          settings[i] = settings[i].trim();
+        }
+        $elem.data("wpsh_hide", settings[0]);
+        $elem.data("wpsh_show", settings[1]);
+        // legacy visibility
+        if (settings.length > 2) {
+          visible = (settings[2].toLowerCase() === 'visible') ? true : false;
         }
       }
 
