@@ -1,0 +1,55 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td { margin:0; padding:0; } table { border-collapse:collapse; border-spacing:0; } fieldset, img { border:0; } address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal; } ol, ul { list-style:none; } caption, th { text-align:left; } h1, h2, h3, h4, h5, h6 { font-size:100%; font-weight:normal; } q:before, q:after { content:''; } abbr, acronym { border:0; } body, html { height: 100%; font-family: "Helvetica Neue", Arial, sans-serif }
+
+
+.header {
+	position: absolute;
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	color: #fff;
+	background: #000;
+}
+
+.header h3 {
+	display: inline-block;
+}
+
+.header a {
+	text-decoration: none;
+	color: #7E8AA2;
+	font-size: 12px;
+	display: inline-block;
+	margin-left: 20px;
+}
+
+.header a:hover {
+	color: #B0C0DB;
+}
+
+.container {
+	height: 100%;
+	padding: 0;
+	margin: 0;
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	text-align: center;
+	min-height: 300px;
+	color: #fff;
+}
+
+.time {
+	font-size:180px;
+	width: 100%;
+}
+
+.color {
+	font-size:100px;
+	width: 100%;
+}

@@ -1,116 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>The Color Clock</title>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-<script>
-function thread_start(callback) {
-	setTimeout(callback, 1);
-	return true;
-}
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The Color Clock</title>
 
-$(document).ready(function() {
-	thread_start(time_bg);
-});
-
-function dec2hex(i)
-{
-  var result = "0000";
-  if      (i >= 0    && i <= 15)    { result = "000" + i.toString(16); }
-  else if (i >= 16   && i <= 255)   { result = "00"  + i.toString(16); }
-  else if (i >= 256  && i <= 4095)  { result = "0"   + i.toString(16); }
-  else if (i >= 4096 && i <= 65535) { result =         i.toString(16); }
-  return result.substring(2);
-}
-
-function time_bg() {
-	var d = new Date();
-	var hours = d.getHours();
-	var mins = d.getMinutes();
-	var secs = d.getSeconds();
-	var hex = "#"+dec2hex(hours) + dec2hex(mins) + dec2hex(secs);
-	if (mins<10)
-		mins = "0" + mins;
-	if (secs<10)
-		secs = "0" + secs;
-	$('#time').html(hours + " : " + mins + " : " + secs);
-	$('body').animate({backgroundColor: hex});
-	$('#color').html(hex);
-	setTimeout(time_bg, 1000);
-}
-</script>
-<style type="text/css">
-/* --- Reset ------------------------ */
- 
- 
-body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
-    margin:0;
-    padding:0;
-}
-table {
-    border-collapse:collapse;
-    border-spacing:0;
-}
-fieldset, img {
-    border:0;
-}
-address, caption, cite, code, dfn, em, strong, th, var {
-    font-style:normal;
-    font-weight:normal;
-}
-ol, ul {
-    list-style:none;
-}
-caption, th {
-    text-align:left;
-}
-h1, h2, h3, h4, h5, h6 {
-    font-size:100%;
-    font-weight:normal;
-}
-q:before, q:after {
-    content:'';
-}
-abbr, acronym {
-    border:0;
-}
-
-/* --- Styles ------------------------ */
-body, html {height: 100%;}
-html {margin:5px; border: #CCC 1px solid;overflow: hidden;}
-#outer {height: 100%; width:100%; overflow: hidden; position: relative;}
-#outer[id] {display: table; position: static;}
-
-#middle {position: absolute; top: 30%;} /* for explorer only*/
-#middle[id] {display: table-cell; vertical-align: middle; width: 100%;}
-
-#inner {position: relative; top: -30%; width:900px;margin:0 auto;} /* for explorer only */
-a {color:#fff; text-decoration:none;}
-a:hover {text-decoration:underline;}
-#time {
-	font-size:180px;
-	text-align:center;
-	color:#FFF;
-}
-#color {
-	font-size:100px;
-	text-align:center;
-	color:#fff;
-}
-</style>
+  <link rel="stylesheet" href="clock.css">
+  <script src="dist.js"></script>
 </head>
-
 <body>
-<div id="outer">
-  <div id="middle">
-    <div id="inner">
-      <div id="time"></div>
-      <div id="color"></div>
+  <div class="header">
+    <h3>Hexadecimal Color Clock</h3>
+    <a class="toggle" href="#">Toggle dynamic color mode</a>
+  </div>
+  <div class="container">
+    <div>
+      <h2 class="time"></h2>
+      <span class="color"></span>
     </div>
   </div>
-</div>
 </body>
 </html>
