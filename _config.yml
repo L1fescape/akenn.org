@@ -10,7 +10,7 @@ github: akenn
 gravatar_url: http://gravatar.com/avatar/f09cff58b90ec70b34605afb26a5964d
 
 exclude: [PSDs/]
-highlighter: true
+pygments: true
 markdown: redcarpet
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data"]
