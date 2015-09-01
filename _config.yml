@@ -1,13 +1,16 @@
 name: Andrew Kennedy
 url: http://akenn.org
-description: An amazing blog that is amazing.
+description: >
+  My name is Andrew Kennedy. I make music, write software, and blog about both.
+  During the day I'm a Frontend Engineer at CloudFlare.  At night I work on
+  open source projects and record music.
 permalink: /blog/:title
-twitter: L1fescape
-github: L1fescape
+twitter: helpybot
+github: akenn
 gravatar_url: http://gravatar.com/avatar/f09cff58b90ec70b34605afb26a5964d
 
 exclude: [PSDs/]
-pygments: true
+highlighter: true
 markdown: redcarpet
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data"]

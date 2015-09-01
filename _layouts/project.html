@@ -1,13 +1,11 @@
----
+-:xa-
 layout: main
 ---
 
 <div class='container'>
   <div class='project single'>
     <div class='info'>
-      <a href='{{ page.link }}'>
-        <img src='{{ page.icon }}' />
-      </a>
+      <a href='{{ page.link }}'><img src='{{ page.icon }}' /></a>
       <ul>
         <li><a href='{{ page.link }}'><h2>{{ page.title }}</h2></a></li>
         {% for info in page.info %}
