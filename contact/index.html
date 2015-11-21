@@ -3,14 +3,14 @@ layout: main
 title: "Contact"
 ---
 
-		<div class='contact'>
-      <p>If you'd like to chat, I respond quickly to emails during the week. You might be able to catch me in between rock climbing and customizing my vimrc on the weekends, but your best bet is an email Monday through Friday. Drop me a line at <code>andrew@akenn.org</code> and I'll get back to you pronto.</p>
-      <p>If you'd like to take the social approach, you can find me on any of the sites below:</p>
-      <ul class='contact-list'>
-        <li><i class="fa fa-envelope-o"></i> andrew@akenn.org</li>
-        <li><a href="https://github.com/akenn"><i class="fa fa-github selected"></i> akenn</a></li>
-        <li><a href="https://twitter.com/helpybot"><i class="fa fa-twitter selected"></i>helpybot</a></li>
-        <li><a href="https://plus.google.com/113415129270300199292/posts"><i class="fa fa-google-plus selected"></i> Andrew Kennedy</a></li>
-        <li><a href="http://www.linkedin.com/profile/view?id=194622112"><i class="fa fa-linkedin selected"></i> Andrew Kennedy</a></li>
-      </ul>
-		</div>
+<div class='contact'>
+  <p>If you'd like to chat, I respond quickly to emails during the week. You might be able to catch me in between rock climbing and customizing my vimrc on the weekends, but your best bet is an email Monday through Friday. Drop me a line at <code>{{ site.social.email }}</code> and I'll get back to you pronto.</p>
+  <p>If you'd like to take the social approach, you can find me on any of the sites below:</p>
+  <ul class='contact-list'>
+    <li><i class="fa fa-envelope-o"></i> {{ site.social.email }}</li>
+    <li><a href="https://github.com/{{ site.social.github }}"><i class="fa fa-github selected"></i> {{ site.social.github }}</a></li>
+    <li><a href="https://twitter.com/{{ site.social.twitter }}"><i class="fa fa-twitter selected"></i>{{ site.social.twitter }}</a></li>
+    <li><a href="https://plus.google.com/{{ site.social.gplus }}/posts"><i class="fa fa-google-plus selected"></i> Andrew Kennedy</a></li>
+    <li><a href="http://www.linkedin.com/profile/view?id={{ site.social.linkedin }}"><i class="fa fa-linkedin selected"></i> Andrew Kennedy</a></li>
+  </ul>
+</div>

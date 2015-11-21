@@ -5,12 +5,20 @@ description: >
   During the day I'm a Frontend Engineer at CloudFlare.  At night I work on
   open source projects and record music.
 permalink: /blog/:title
-twitter: helpybot
-github: akenn
 gravatar_url: http://gravatar.com/avatar/f09cff58b90ec70b34605afb26a5964d
+social:
+  email: andrew@akenn.org
+  twitter: helpybot
+  github: akenn
+  keybase: akenn
+  soundcloud: helpybot
+  gplus: 113415129270300199292
+  reddit: L1fescape
+  linkedin: 194622112
 
 exclude: [PSDs/]
-pygments: true
+
+highlighter: true
 markdown: redcarpet
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data"]
