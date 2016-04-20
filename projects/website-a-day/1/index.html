@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World</title>
+  <style>
+
+    @keyframes flyright {
+      100% {
+        left: 100%;
+        top: 200%;
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes flyleft {
+      100% {
+        right: 100%;
+        top: 200%;
+        -webkit-transform: rotate(-360deg) scaleX(-1);
+        transform: rotate(-360deg) scaleX(-1);
+      }
+    }
+
+    .dolphin {
+      left: -20px;
+      top: -250px;
+      position: absolute;
+      width: 50%;
+      animation: flyright 5s linear infinite;
+    }
+
+    .dolphin.left {
+      right: -20px;
+      left: auto;
+      animation: flyleft 5s linear infinite;
+
+      -webkit-transform: rotate(0deg) scaleX(-1);
+      transform: rotate(0deg) scaleX(-1);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="hello-cow">
+    <pre>
+   ______ 
+  <  Hi! >
+   ------ 
+          \   ^__^
+           \  (oo)\_______
+              (__)\       )\/\
+                  ||----w |
+                  ||     ||
+
+    </pre>
+  </div>
+  <script>
+    // change cow text color
+    var cowInterval = setInterval(function() {
+      document.getElementsByClassName('hello-cow')[0].style.color = '#' + Math.floor(Math.random()*16777215).toString(16);
+    }, 500);
+
+    // dolphin magic
+    var fiesta = function(show) {
+      var dolphin = document.createElement('img');
+      dolphin.setAttribute('src', 'dolphin.png');
+      dolphin.className = 'dolphin';
+      document.body.appendChild(dolphin);
+
+      if (Math.random() < 0.5) {
+        dolphin.className += ' left';
+      }
+
+      setTimeout(function() {
+        document.body.removeChild(dolphin);
+      }, 5000);
+    }
+
+    var dolphinInterval = setInterval(fiesta, 3000);
+
+  </script>
+</body>
+</html>
