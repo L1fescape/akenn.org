@@ -1,5 +1,5 @@
 {
-  "name": "day4",
+  "name": "day5",
   "version": "1.0.0",
   "author": "Andrew Kennedy <andrew@akenn.org>",
   "description": "",
@@ -34,7 +34,6 @@
   },
   "dependencies": {
     "lodash": "^4.11.1",
-    "moment": "^2.13.0",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "reflux": "^0.4.1"
