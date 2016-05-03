@@ -10,6 +10,6 @@ body {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-div {
-  text-align: center;
+#app {
+  padding: 0 2em;
 }
