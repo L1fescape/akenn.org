@@ -1,0 +1,36 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background: #f6f6f6;
+  position: relative;
+  overflow: auto;
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#app {
+  padding: 0 2em;
+}
+
+button {
+  border: 1px solid #AEA79F;
+  border-radius: 2px;
+  position: relative;
+  background-color: #F2F1F0;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button.installing {
+  color: #AEA79F;
+}
+
+.progress {
+  position: absolute;
+  background-color: #E95420;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+}
