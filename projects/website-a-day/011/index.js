@@ -13,15 +13,12 @@ import {
 } from 'react-redux'
 
 // Reducers
-function code(state = {}, action) {
+function codeReducer(state = {}, action) {
   switch (action.type) {
     case 'UPDATE_CODE':
-      return [
-        ...state,
-        Object.assign({}, state, {
-          code: action.code
-        })
-      ];
+      return {
+        code: action.code
+      };
     default:
       return state;
   }
@@ -29,33 +26,29 @@ function code(state = {}, action) {
 
 // Actions
 const updateCode = (code) => {
-  console.log(code);
   return {
     type: 'UPDATE_CODE',
-    code
+    code: code
   };
 };
 
 // Stores
-let store = createStore(combineReducers({code}))
+let store = createStore(codeReducer)
 
 //
-const mapStateToProps = (state = { code: '' }) => {
-  console.log(state);
+const mapStateToProps = (state) => {
   return {
-    code: ''
+    code: state.code || ''
   }
 }
 
 // Components
 let JSEditor = ({ dispatch }) => {
-  function handleChange(e) {
-    dispatch(updateCode(e.target.value))
-  }
-
   return (
     <textarea
-      onChange={handleChange}>
+      onChange={(e) => {
+        dispatch(updateCode(e.target.value))
+      }}>
     </textarea>
   );
 }
@@ -63,7 +56,6 @@ let JSEditor = ({ dispatch }) => {
 JSEditor = connect()(JSEditor)
 
 let Renderer = ({ code }) => {
-  console.log(code);
   return (
     <div>
       { code }
