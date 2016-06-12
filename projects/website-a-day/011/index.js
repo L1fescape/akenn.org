@@ -53,19 +53,33 @@ let JSEditor = ({ dispatch }) => {
   );
 }
 
-JSEditor = connect()(JSEditor)
+JSEditor = connect()(JSEditor);
 
-let Renderer = ({ code }) => {
-  return (
-    <div>
-      { code }
-    </div>
-  );
-}
+let Renderer = React.createClass({
+  propTypes: {
+    code: PropTypes.string.isRequired
+  },
 
-Renderer.propTypes = {
-  code: PropTypes.string.isRequired
-};
+  componentDidUpdate: function() {
+    let document = this.refs.iframe.contentWindow.document;
+    let oldScript = document.getElementById('code');
+    oldScript.parentNode.removeChild(oldScript);
+    document.appendChild(this.createScript(this.props.code));
+  },
+
+  createScript: function(code) {
+    let script = document.createElement('script');
+    script.id = 'code';
+    script.src = code || '';
+    return script;
+  },
+
+  render: function() {
+    return (
+      <iframe sandbox="allow-scripts allow-same-origin" id="sandboxed" ref="iframe"></iframe>
+    );
+  }
+});
 
 Renderer = connect(mapStateToProps)(Renderer);
 
